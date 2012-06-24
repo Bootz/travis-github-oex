@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets"
-           id="http://github.com/smasty/travis-github-opera-ext">
+           id="http://github.com/smasty/travis-github-oex">
   <name>Travis+GitHub</name>
   <description>Displays Travis CI build status next to project name on GitHub. This is a port of Chorme extension.</description>
   <author href="http://smasty.net"
