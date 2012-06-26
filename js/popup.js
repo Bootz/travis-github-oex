@@ -89,6 +89,13 @@ oex.listen(window, 'DOMContentLoaded', function(){
 
 
 	/* ======  Add new project  ====== */
+	oex.listen(oex.id('add-toggle'), 'click', function(e){
+		e.preventDefault();
+		var addForm = oex.id('add-form');
+
+		addForm.className = (addForm.className == 'show') ? '' : 'show';
+	});
+
 	oex.listen(oex.id('add-form'), 'submit', function(e){
 		e.preventDefault();
 
@@ -99,6 +106,8 @@ oex.listen(window, 'DOMContentLoaded', function(){
 			project.value = '';
 
 			oex.storage.save('projectList', projectList);
+
+			oex.id('add-form').className = '';
 		}
 	});
 
