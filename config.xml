@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets"
-           id="http://github.com/smasty/travis-github-oex">
-  <name>Travis+GitHub</name>
-  <description>Displays Travis CI build status next to project name on GitHub. This is a port of Chorme extension.</description>
-  <author href="http://smasty.net"
-          email="hello@smasty.net">Smasty</author>
-  <icon src="icon.png"/>
+<!--
+  This file is a part of Travis+GitHub Opera extension.
+  Licensed under the MIT License (see readme).
+  (c) 2012 Smasty, http://smasty.net
+-->
+	<widget xmlns="http://www.w3.org/ns/widgets"
+		id="http://github.com/smasty/travis-github-oex"
+		version="3.0-dev">
+	<name>Travis+GitHub</name>
+	<description>
+		Displays project build status via Travis on GitHub user/project pages
+		and provides a button for monitoring status of your projects.
+	</description>
+	<author href="http://smasty.net" email="hello@smasty.net">Smasty</author>
+	<icon src="icons/icon.png"/>
+	<preference name="showBtn" value="1"/>
+	<access origin="http://travis-ci.org" subdomains="true"/>
 </widget>

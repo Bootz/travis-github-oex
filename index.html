@@ -1,1 +1,44 @@
+<!DOCTYPE html>
+<!--
+  This file is a part of Travis+GitHub Opera extension.
+  Licensed under the MIT License (see readme).
+  (c) 2012 Smasty, http://smasty.net
+-->
+ <html>
+	<head>
+		<script src="js/oex.js"></script>
+		<script>
+			var prefs = widget.preferences;
 
+			oex.listen(window, 'load', function(){
+				var theButton;
+				var UIItemProperties = {
+					disabled: false,
+					title: 'Monitor build status',
+					icon: 'icons/button.png',
+					popup: {
+						href: 'popup.html',
+						width: 330,
+						height: 250
+					}
+				}
+				theButton = opera.contexts.toolbar.createItem(UIItemProperties);
+
+				var hasButton = false;
+				setInterval(function(){
+					if(!hasButton && parseInt(prefs.showBtn) == 1){
+						opera.contexts.toolbar.addItem(theButton);
+						hasButton = true;
+					}
+					if(hasButton && parseInt(prefs.showBtn) == 0){
+						opera.contexts.toolbar.removeItem(theButton);
+						hasButton = false;
+					}
+				}, 2000);
+
+			});
+    </script>
+	</head>
+	<body>
+	</body>
+</html>
