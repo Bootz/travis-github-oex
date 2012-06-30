@@ -53,6 +53,7 @@ oex.listen(window, 'DOMContentLoaded', function(){
 				href: 'http://travis-ci.org/' + project,
 				class: 'status'
 			});
+
 			statusLink.appendChild(oex.el('img', {
 				src: 'http://travis-ci.org/' + project + '.png',
 				alt: 'build status'
@@ -69,7 +70,6 @@ oex.listen(window, 'DOMContentLoaded', function(){
 			// Remove project when 'x' is clicked
 			oex.listen(removeLink, 'click', function(e){
 				e.preventDefault();
-				console.log(this.dataset.id);
 				projectList.splice(parseInt(this.dataset.id), 1);
 				listProjects(projectList);
 

@@ -23,11 +23,12 @@ window.addEventListener('DOMContentLoaded', function(){
 	var links = document.querySelectorAll('.repo_list li h3');
 	if(links.length > 0){
 		insertCss('2px 0 0');
-	}
-	for(i in links){
-		var project = '/' + links[i].querySelector('a').href.split('/').splice(3,3).join('/');
-		console.log(project);
-		insertBuildStatus(links[i], project);
+		for(i in links){
+			if(typeof links[i] == 'object'){
+				var project = '/' + links[i].querySelector('a').href.split('/').splice(3,3).join('/');
+				insertBuildStatus(links[i], project);
+			}
+		}
 	}
 
 
@@ -41,12 +42,14 @@ window.addEventListener('DOMContentLoaded', function(){
 		img.src = 'https://secure.travis-ci.org' + project + '.png';
 		img.alt = 'build status';
 		img.onload = function(){
-			var link = window.document.createElement('a');
-			link.href = 'http://travis-ci.org' + project;
-			link.className = 'travis-ci';
+			if(!isStatusUnknown(img)){
+				var link = window.document.createElement('a');
+				link.href = 'http://travis-ci.org' + project;
+				link.className = 'travis-ci';
 
-			link.appendChild(img);
-			el.appendChild(link);
+				link.appendChild(img);
+				el.appendChild(link);
+			}
 		}
 	}
 
@@ -60,6 +63,16 @@ window.addEventListener('DOMContentLoaded', function(){
 		css.insertRule('.travis-ci:hover{opacity:1;cursor:pointer}', 1);
 		css.insertRule('.travis-ci img{position:relative;left:-53px;-o-transition:all .3s}', 1);
 		css.insertRule('.travis-ci:hover img{left:0}', 1);
+	}
+
+	/**
+	 * Checks if image is "build status unknown".
+	 * @param  {Element}  img
+	 * @return {Boolean}
+	 */
+	function isStatusUnknown(img){
+		// Cannot compare actual image data through canvas due to Same Origin Policy
+		return img.width == 95 && img.height == 13;
 	}
 
 }, false);
