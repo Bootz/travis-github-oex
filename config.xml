@@ -6,7 +6,7 @@
 -->
 	<widget xmlns="http://www.w3.org/ns/widgets"
 		id="http://github.com/smasty/travis-github-oex"
-		version="3.1">
+		version="3.2">
 	<name>Travis+GitHub</name>
 	<description>
 		Displays project build status via Travis on GitHub user/project pages
