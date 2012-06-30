@@ -3,6 +3,8 @@
 Displays project build status via Travis on GitHub user/project pages
 and provides a button for monitoring status of your projects.
 
+Use the official Opera Addons site for [download](https://addons.opera.com/en/extensions/details/travisgithub).
+
 Licensed under the MIT License.
 
 ## The MIT License
