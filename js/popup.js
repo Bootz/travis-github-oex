@@ -93,7 +93,12 @@ oex.listen(window, 'DOMContentLoaded', function(){
 		e.preventDefault();
 		var addForm = oex.id('add-form');
 
-		addForm.className = (addForm.className == 'show') ? '' : 'show';
+		if(addForm.className == 'show'){
+			addForm.className = '';
+		} else{
+			addForm.className = 'show';
+			oex.id('add-project').focus();
+		}
 	});
 
 	oex.listen(oex.id('add-form'), 'submit', function(e){
