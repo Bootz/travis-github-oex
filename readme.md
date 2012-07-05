@@ -2,6 +2,7 @@
 
 This Opera extension shows build status badge next to GitHub repositories which use Travis for testing their code.
 Badge is added to the repository page, as well as to user and organization pages next to the repository names.
+
 In addition, a button with popup is provided, that lets you add custom repositories you want to monitor.
 The extension also shows build status of pull requests that were
 [tested by travisbot](http://about.travis-ci.org/blog/announcing-pull-request-support/).
