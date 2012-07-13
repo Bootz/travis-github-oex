@@ -33,28 +33,14 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	// Inject build status to pull request page
 	if(document.querySelectorAll('.page-pullrequest').length > 0){
-		insertPullRequestStatus(document, document.querySelector('.pull-head .number'), 'pull');
+		insertPullRequestStatus(document, document.querySelector('.pull-head'), 'pull');
 	}
 
-	// Inject build status to list of pull requests
-	showPullRequestStatus();
-	var browserControls = document.querySelectorAll('.browser.pulls .sidebar a, .browser.pulls .filterbar li');
-	if(browserControls.length > 0){
-		for(i in browserControls){
-			if(typeof browserControls[i] == 'object'){
-				browserControls[i].onclick = function(e){
-					setTimeout(function(){
-						showPullRequestStatus();
-					}, 3000);
-				};
-			}
-		}
-	}
 
 	/**
 	 * Inserts build status badge to the given element.
-	 * @param  {Element} el      Element to append badge to.
-	 * @param  {String}  project Project name (e.g. '/symfony/framework').
+	 * @param  {Element} el        Element to append badge to.
+	 * @param  {String}  project   Project name (e.g. '/symfony/framework').
 	 * @param  {String}  className Class to apply to badge.
 	 */
 	function insertBuildStatus(el, project, className){
@@ -84,7 +70,7 @@ window.addEventListener('DOMContentLoaded', function(){
 		css.insertRule('.travis-ci:hover img{left:0}', 1);
 		css.insertRule('.travis-ci.repo {margin:0 0 0 8px}', 1);
 		css.insertRule('.travis-ci.user {margin:2px 0 0}', 1);
-		css.insertRule('.travis-ci.pull {margin:1px 0 0 8px;opacity:1}', 1);
+		css.insertRule('.travis-ci.pull {margin:0;top:15px;right:-90px}', 1);
 		css.insertRule('.travis-ci.pull-list {margin:1px 0 0 8px;top:-1px}', 1);
 		css.insertRule('.travis-ci.pull-list.pass {right:-90px}', 1);
 		css.insertRule('.travis-ci.pull-list.fail {right:-83px}', 1);
@@ -102,7 +88,8 @@ window.addEventListener('DOMContentLoaded', function(){
 
 	/**
 	 * Creates static build status image for Pull Requests.
-	 * @param  {Element} status Status link from travisbot comment.
+	 * @param  {Element} status    Status link from travisbot comment.
+	 * @param  {string}  className Additional class name for the badge.
 	 * @return {Element|false}
 	 */
 	function createStatusImage(status, className){
@@ -129,6 +116,12 @@ window.addEventListener('DOMContentLoaded', function(){
 		return link;
 	}
 
+	/**
+	 * Inserts build status of pull request tested by travisbot.
+	 * @param  {Element} doc       Document element.
+	 * @param  {Element} place     Place to put the badge.
+	 * @param  {String}  className Additional class name for the badge.
+	 */
 	function insertPullRequestStatus(doc, place, className){
 		var comments = doc.querySelectorAll('.discussion-timeline .avatar-bubble');
 		if(comments.length > 0){
@@ -147,31 +140,6 @@ window.addEventListener('DOMContentLoaded', function(){
 				var image = createStatusImage(status, className);
 				if(image){
 					place.appendChild(image);
-				}
-			}
-		}
-	}
-
-	function processPullRequest(url, el){
-		var xhr = new window.XMLHttpRequest();
-		xhr.onreadystatechange = function(){
-			if(xhr.readyState == 4 && xhr.status == 200){
-				var doc = document.createElement('div');
-				doc.innerHTML = xhr.responseText;
-				//console.log(doc.querySelector('.pull-head .number a').text);
-				insertPullRequestStatus(doc, el, 'pull-list');
-			}
-		}
-		xhr.open('GET', url, true);
-		xhr.send();
-	}
-
-	function showPullRequestStatus(){
-		var pulls = document.querySelectorAll('.browser.pulls .browser-content .listing');
-		if(pulls.length > 0){
-			for(i in pulls){
-				if(typeof pulls[i] == 'object'){
-					processPullRequest(pulls[i].querySelector('h3 a').href, pulls[i]);
 				}
 			}
 		}
