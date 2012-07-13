@@ -36,6 +36,21 @@ window.addEventListener('DOMContentLoaded', function(){
 		insertPullRequestStatus(document, document.querySelector('.pull-head'), 'pull');
 	}
 
+	// Inject build status to list of pull requests
+	showPullRequestStatus();
+	var browserControls = document.querySelectorAll('.browser.pulls .sidebar a, .browser.pulls .filterbar li');
+	if(browserControls.length > 0){
+		for(i in browserControls){
+			if(typeof browserControls[i] == 'object'){
+				browserControls[i].onclick = function(e){
+					setTimeout(function(){
+						showPullRequestStatus();
+					}, 3000);
+				};
+			}
+		}
+	}
+
 
 	/**
 	 * Inserts build status badge to the given element.
@@ -140,6 +155,39 @@ window.addEventListener('DOMContentLoaded', function(){
 				var image = createStatusImage(status, className);
 				if(image){
 					place.appendChild(image);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Processes pull request by URL.
+	 * @param  {String}  url URL of the pull request.
+	 * @param  {Element} el  Place to put the badge.
+	 */
+	function processPullRequest(url, el){
+		var xhr = new window.XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status == 200){
+				var doc = document.createElement('div');
+				doc.innerHTML = xhr.responseText;
+				//console.log(doc.querySelector('.pull-head .number a').text);
+				insertPullRequestStatus(doc, el, 'pull-list');
+			}
+		}
+		xhr.open('GET', url, true);
+		xhr.send();
+	}
+
+	/**
+	 * Shows build status of pull requests in the listing.
+	 */
+	function showPullRequestStatus(){
+		var pulls = document.querySelectorAll('.browser.pulls .browser-content .listing');
+		if(pulls.length > 0){
+			for(i in pulls){
+				if(typeof pulls[i] == 'object'){
+					processPullRequest(pulls[i].querySelector('h3 a').href, pulls[i]);
 				}
 			}
 		}
