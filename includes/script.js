@@ -70,7 +70,8 @@ window.addEventListener('DOMContentLoaded', function(){
 		css.insertRule('.travis-ci:hover img{left:0}', 1);
 		css.insertRule('.travis-ci.repo {margin:0 0 0 8px}', 1);
 		css.insertRule('.travis-ci.user {margin:2px 0 0}', 1);
-		css.insertRule('.travis-ci.pull {margin:0;top:15px;right:-90px}', 1);
+		css.insertRule('.pull-head {position:relative}', 1);
+		css.insertRule('.travis-ci.pull {margin:0;top:12px;right:-90px}', 1);
 		css.insertRule('.travis-ci.pull-list {margin:1px 0 0 8px;top:-1px}', 1);
 		css.insertRule('.travis-ci.pull-list.pass {right:-90px}', 1);
 		css.insertRule('.travis-ci.pull-list.fail {right:-83px}', 1);
