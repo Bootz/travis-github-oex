@@ -9,8 +9,16 @@
 		version="3.2.2">
 	<name>Travis+GitHub</name>
 	<description>
-		Displays project build status via Travis on GitHub user/project pages
-		and provides a button for monitoring status of your projects.
+		Displays build status on GitHub.
+		Shows build status badge next to GitHub repositories which use
+		Travis for testing their code. Badge is added to the repository page,
+		as well as to user and organization pages next to the repository names.
+
+		In addition, a button with popup is provided, that lets you add custom
+		repositories you want to monitor. The extension also shows build status
+		of pull requests that were tested by travisbot.
+
+		The extension is also available on GitHub: http://github.com/smasty/travis-github-oex
 	</description>
 	<author href="http://smasty.net" email="hello@smasty.net">Smasty</author>
 	<icon src="icons/icon.png"/>
