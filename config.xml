@@ -15,8 +15,7 @@
 		as well as to user and organization pages next to the repository names.
 
 		In addition, a button with popup is provided, that lets you add custom
-		repositories you want to monitor. The extension also shows build status
-		of pull requests that were tested by travisbot.
+		repositories you want to monitor.
 
 		The extension is also available on GitHub: http://github.com/smasty/travis-github-oex
 	</description>
